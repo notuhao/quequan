@@ -1,5 +1,6 @@
 <!--
   2025 作者：末伏之夜。
+  基于 MIT License 开源。
   请务必从可靠来源访问最新版本：
   残兽前进基地（下班魔同人侧） 群号码：805836168
   魔法国度娱乐中心（下班魔游戏群） 群号码：109252951
@@ -106,7 +107,7 @@
   <!-- 页脚版权声明 -->
   <footer>
     2025 末伏之夜<br>
-    请从可靠来源访问最新版本：<br><a href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=7SkPyirELH-LN52Tz8PHjl1TLqbHwhdh&authKey=fGUcO5nmulznuZrZUGGJ01CFS4phfoPdo%2B3QoppW5FwcsO%2BsuLHRcpTSdhqYVPrF&noverify=0&group_code=805836168" target="_blank">残兽前进基地（下班魔同人侧）</a><br><a href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=rU7wcxZXUtC-U1nafP29Cgv5CfFWlAHl&authKey=%2BrMuEaGIlWVNL7ZKvs1ZoZBWUsUk9X7MEmDMeG1Xy5t86nekeIENl%2BLFytjC4zzg&noverify=0&group_code=109252951" target="_blank">魔法国度娱乐中心（下班魔游戏群）</a>
+    请从可靠来源访问最新版本：<br><a href="https://github.com/notuhao/quequan-game" target="_blank">GitHub</a><br><a href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=7SkPyirELH-LN52Tz8PHjl1TLqbHwhdh&authKey=fGUcO5nmulznuZrZUGGJ01CFS4phfoPdo%2B3QoppW5FwcsO%2BsuLHRcpTSdhqYVPrF&noverify=0&group_code=805836168" target="_blank">残兽前进基地（下班魔同人侧）</a><br><a href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=rU7wcxZXUtC-U1nafP29Cgv5CfFWlAHl&authKey=%2BrMuEaGIlWVNL7ZKvs1ZoZBWUsUk9X7MEmDMeG1Xy5t86nekeIENl%2BLFytjC4zzg&noverify=0&group_code=109252951" target="_blank">魔法国度娱乐中心（下班魔游戏群）</a>
   </footer>
   <!-- 内嵌事件数据 -->
   <script id="events-data" type="application/json">
@@ -499,7 +500,7 @@
     function showSettlement(cause) {
       gameOver = true;
       let title = msgMap[cause] || '未知原因';
-      let shareText = `孩子们，我是保姆权杖矢车菊，我在雀权中打出了结局【${title}】\n回合数：${turnCount}\n小璐：${stats.attr1}  夏凉：${stats.attr2}  小白：${stats.attr3}  责任：${stats.attr4}\n👉 快来挑战：http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=rU7wcxZXUtC-U1nafP29Cgv5CfFWlAHl&group_code=109252951`;
+      let shareText = `孩子们，我是保姆权杖矢车菊，我在雀权中打出了结局【${title}】\n回合数：${turnCount}\n小璐：${stats.attr1}  夏凉：${stats.attr2}  小白：${stats.attr3}  责任：${stats.attr4}\n👉 快来挑战：https://notuhao.github.io/quequan-game/`;
       $('body').append(`
         <div id="game-over">
           <h2>游戏结束：${title}</h2>

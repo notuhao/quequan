@@ -327,7 +327,7 @@
     function showSettlement(cause) {
       gameOver = true;
       const title = msgMap[cause] || '未知原因';
-      const shareText = `孩子们，我是保姆权杖矢车菊，我在雀权中打出了结局【${title}】\n回合数：${turnCount}\n小璐：${stats.attr1}  夏凉：${stats.attr2}  小白：${stats.attr3}  责任：${stats.attr4}\n👉 快来挑战：https://notuhao.github.io/quequan-game/`;
+      const shareText = `孩子们，我是保姆权杖矢车菊，我在雀权中打出了结局【${title}】\n回合数：${turnCount}\n小璐：${stats.attr1}  夏凉：${stats.attr2}  小白：${stats.attr3}  责任：${stats.attr4}\n👉 快来挑战：https://quequan-game.pages.dev/`;
       $('body').append(`
         <div id="game-over">
             <h2>游戏结束：${title}</h2>

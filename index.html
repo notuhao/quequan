@@ -197,6 +197,7 @@
     let turnCount = 0;
     let stats = { attr1:50, attr2:50, attr3:50, attr4:50 };
     let lastCause = '';     // 用于记录触发的结局类型
+    let lastCauses = [];    // 本局触发的所有结局（如有多个）
     let recentEvents = [];  // 保存最近两次展示的事件 ID
     let gameOver = false;
     let endingMode = false;
@@ -316,35 +317,102 @@
 
     // 检查是否结束
     function checkGameOver() {
+      const triggered = [];
       for (const k in stats) {
-        if (stats[k] <= 0) { startEndingEvent(k+'Low'); return true; }
-        if (stats[k] >= 100){ startEndingEvent(k+'High'); return true; }
+        if (stats[k] <= 0)   triggered.push(k+'Low');
+        if (stats[k] >= 100) triggered.push(k+'High');
+      }
+      const uniqueCauses = Array.from(new Set(triggered));
+      if (uniqueCauses.length) {
+        startEndingEvents(uniqueCauses);
+        return true;
       }
       return false;
     }
 
+    // 一次性触发所有结局
+    function startEndingEvents(causes) {
+      lastCauses = causes;
+      showEndingSequence(0);
+    }
+
+    // 递归展示每一个结局事件
+    function showEndingSequence(idx) {
+      if (idx >= lastCauses.length) {
+        showSettlement(lastCauses);
+        return;
+      }
+      const cause = lastCauses[idx];
+      // 触发单个结局事件，播放完后回调 next
+      startEndingEvent(cause, () => showEndingSequence(idx+1));
+    }
+
+    // 修改原有 startEndingEvent，支持 callback
+    function startEndingEvent(cause, callback) {
+      lastCause = cause;
+      const eid = 'end-' + cause;
+      if (!eventMap[eid]) {
+        // 如果没有对应事件，直接跳结算
+        return callback
+          ? callback()
+          : showSettlement([cause]);
+      }
+      endingMode = true;
+      currentEvent = eventMap[eid];
+      $('#event-text').html(currentEvent.text);
+      clearArrows();
+
+      // 在单个结局事件里，玩家点击任意按钮都执行 callback
+      $('#btn-left, #btn-right').off('click').click(() => {
+        endingMode = false;
+        callback();
+      });
+    }
+
     // 展示结算与分享
-    function showSettlement(cause) {
+    function showSettlement(causes) {
       gameOver = true;
-      const title = msgMap[cause] || '未知原因';
-      const shareText = `孩子们，我是保姆权杖矢车菊，我在雀权中打出了结局【${title}】\n回合数：${turnCount}\n小璐：${stats.attr1}  夏凉：${stats.attr2}  小白：${stats.attr3}  责任：${stats.attr4}\n👉 快来挑战：https://quequan-game.pages.dev/`;
+      // 1. 标题合并
+      const titles = causes.map(c => msgMap[c] || '未知原因');
+      const mainTitle = titles.join('、');
+
+      // 2. 成就映射
+      const achievementMap = {2: '脚踏两条船', 3: '三个鸡蛋上跳舞的高手', 4: '恶意控股'};
+      let achHTML = '', shareExtra = '';
+      if (causes.length >= 2) {
+        const ach = achievementMap[causes.length] || '';
+        achHTML = `<p>🎉 彩蛋：您同时触发了 ${causes.length} 个结局，成就【${ach}】已解锁！</p>`;
+        shareExtra = `同时触发 ${causes.length} 个结局，成就【${ach}】\n`;
+      }
+
+      // 3. 构建分享文本
+      const shareText =
+        `孩子们，我是保姆权杖矢车菊，我在雀权中打出了结局【${mainTitle}】\n` +
+        shareExtra +
+        `回合数：${turnCount}\n` +
+        `小璐：${stats.attr1}  夏凉：${stats.attr2}  小白：${stats.attr3}  责任：${stats.attr4}\n` +
+        `👉 快来挑战：https://quequan-game.pages.dev/`;
+
+      // 4. 渲染结算界面（在原有 html 模板里插入 achHTML）
       $('body').append(`
         <div id="game-over">
-            <h2>游戏结束：${title}</h2>
-            <p>回合数：${turnCount}</p>
-            <p>【最终统计】</p>
-            <p>林小璐亲密度：${stats.attr1}</p>
-            <p>夏凉亲密度：${stats.attr2}</p>
-            <p>白静萱亲密度：${stats.attr3}</p>
-            <p>身为魔法少女的责任：${stats.attr4}</p>
-            <button id="btn-share" class="btn btn-light">分享结果</button>
-            <small id="share-tip" style="display:none; margin-top:5px;">内容已复制到剪切板</small><br>
-            <button id="btn-restart" class="btn btn-light mt-3">重新开始</button>
-            <p>事件、数值设计仍有欠缺，诚邀您进群参与开发。</p>
+          <h2>游戏结束：${mainTitle}</h2>
+          ${achHTML}
+          <p>回合数：${turnCount}</p>
+          <p>【最终统计】</p>
+          <p>林小璐亲密度：${stats.attr1}</p>
+          <p>夏凉亲密度：${stats.attr2}</p>
+          <p>白静萱亲密度：${stats.attr3}</p>
+          <p>身为魔法少女的责任：${stats.attr4}</p>
+          <button id="btn-share" class="btn btn-light">分享结果</button>
+          <small id="share-tip" style="display:none; margin-top:5px;">内容已复制到剪切板</small><br>
+          <button id="btn-restart" class="btn btn-light mt-3">重新开始</button>
+          <p>事件、数值设计仍有欠缺，诚邀您进群参与开发。</p>
         </div>
       `);
+      // 绑定分享时也会把 shareExtra 一起复制
       $('#btn-share').click(() => {
-        navigator.clipboard.writeText(shareText).then(()=>$('#share-tip').show());
+        navigator.clipboard.writeText(shareText).then(() => $('#share-tip').show());
       });
       $('#btn-restart').click(()=>location.reload());
     }

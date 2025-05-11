@@ -79,7 +79,7 @@
       { "field": "attr1",        "op": "<",  "value": 25 },
       { "field": "attr2",        "op": "<",  "value": 25 },
       { "field": "attr3",        "op": "<",  "value": 25 },
-      { "field": "attr4",        "op": "<",  "value": 30 }
+      { "field": "attr4",        "op": "<",  "value": 25 }
     ]
   },
   {

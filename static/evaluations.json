@@ -100,7 +100,7 @@
   },
   {
     "id": "rebelDaughter",
-    "name": "你能违抗拥有女儿身份的我吗？",
+    "name": "你能违抗拥有女儿之力的我吗？",
     "conditions": [
       { "field": "endings",      "op": "includes", "value": "attr2Low" },
       { "field": "endings",      "op": "includes", "value": "attr1High" }

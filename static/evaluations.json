@@ -7,10 +7,10 @@
     ]
   },
   {
-    "id": "keepGoing",
-    "name": "不要停下来啊！",
+    "id": "openingKill",
+    "name": "开幕雷击",
     "conditions": [
-      { "field": "endCount",     "op": ">",  "value": 10 }
+      { "field": "turnCount",     "op": "=",  "value": 2 }
     ]
   },
   {
@@ -18,6 +18,13 @@
     "name": "平衡大师",
     "conditions": [
       { "field": "turnCount",    "op": ">",  "value": 30 }
+    ]
+  },
+  {
+    "id": "keepGoing",
+    "name": "不要停下来啊！",
+    "conditions": [
+      { "field": "turnCount",    "op": ">",  "value": 50 }
     ]
   },
   {

@@ -69,10 +69,10 @@
     "id": "farFromPeople",
     "name": "距离人已经很远了",
     "conditions": [
-      { "field": "attr1",        "op": "<",  "value": 20 },
-      { "field": "attr2",        "op": "<",  "value": 20 },
-      { "field": "attr3",        "op": "<",  "value": 20 },
-      { "field": "attr4",        "op": "<",  "value": 20 }
+      { "field": "attr1",        "op": "<",  "value": 25 },
+      { "field": "attr2",        "op": "<",  "value": 25 },
+      { "field": "attr3",        "op": "<",  "value": 25 },
+      { "field": "attr4",        "op": "<",  "value": 30 }
     ]
   },
   {

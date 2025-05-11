@@ -180,20 +180,18 @@
 
   // 从外部 JSON 加载事件并启动 initGame
   function fetchEventsAndStart() {
-    fetch('static/events.json')
-      .then(res => {
-        if (!res.ok) throw new Error('网络错误 ' + res.status);
-        return res.json();
-      })
-      .then(rawEvents => initGame(rawEvents))
-      .catch(err => {
-        $('#event-text').text('事件数据加载失败，请刷新或联系作者');
+    Promise.all([
+      fetch('static/events.json').then(r=>r.json()),
+      fetch('static/evaluations.json').then(r=>r.json())
+    ]).then(([rawEvents, evaluations]) => initGame(rawEvents, evaluations))
+      .catch(err=>{
+        $('#event-text').text('静态数据加载失败，请刷新或联系作者');
         console.error(err);
       });
   }
 
   // 真正的游戏逻辑入口
-  function initGame(rawEvents) {
+  function initGame(rawEvents, evaluations) {
     let turnCount = 0;
     let stats = { attr1:50, attr2:50, attr3:50, attr4:50 };
     let lastCause = '';     // 用于记录触发的结局类型
@@ -202,6 +200,7 @@
     let gameOver = false;
     let endingMode = false;
     let chainNext = null;
+    let evaluationsMap = evaluations;    // 上面加载进来的评价数组
 
     // 给每个事件补全默认字段
     const allEvents = rawEvents.map(e => ({
@@ -377,12 +376,43 @@
       const mainTitle = titles.join('、');
 
       // 2. 成就映射
-      const achievementMap = {2: '脚踏两条船', 3: '三个鸡蛋上跳舞的高手', 4: '恶意控股'};
+      const achievementMap = {2: '脚踏两条船', 3: '三个鸡蛋上跳舞的高手', 4: '传奇操盘手'};
       let achHTML = '', shareExtra = '';
       if (causes.length >= 2) {
         const ach = achievementMap[causes.length] || '';
         achHTML = `<p>🎉 彩蛋：您同时触发了 ${causes.length} 个结局，成就【${ach}】已解锁！</p>`;
         shareExtra = `同时触发 ${causes.length} 个结局，成就【${ach}】\n`;
+      }
+
+      // —— 评价判定 —— //
+      const evalLines = [];
+      const context = {
+        turnCount,
+        endCount: causes.length,
+        attr1: stats.attr1, attr2: stats.attr2,
+        attr3: stats.attr3, attr4: stats.attr4,
+        endings: causes
+      };
+      evaluationsMap.forEach(ev => {
+        const ok = ev.conditions.every(cond => {
+          const v = context[cond.field];
+          switch (cond.op) {
+            case '=':        return v === cond.value;
+            case '>':        return v > cond.value;
+            case '<':        return v < cond.value;
+            case 'includes': return Array.isArray(v) && v.includes(cond.value);
+          }
+        });
+        if (ok) {
+          evalLines.push(ev.name);
+          shareExtra += `评价【${ev.name}】\n`;
+        }
+      });
+      let evalHTML = '';
+      if (evalLines.length) {
+        evalHTML = evalLines
+          .map(name => `<p class="text-info">💬 评价：${name}</p>`)
+          .join('');
       }
 
       // 3. 构建分享文本
@@ -393,11 +423,12 @@
         `小璐：${stats.attr1}  夏凉：${stats.attr2}  小白：${stats.attr3}  责任：${stats.attr4}\n` +
         `👉 快来挑战：https://quequan-game.pages.dev/`;
 
-      // 4. 渲染结算界面（在原有 html 模板里插入 achHTML）
+      // 4. 渲染结算界面（在原有 html 模板里插入 achHTML 和 evalHTML）
       $('body').append(`
         <div id="game-over">
           <h2>游戏结束：${mainTitle}</h2>
           ${achHTML}
+          ${evalHTML}
           <p>回合数：${turnCount}</p>
           <p>【最终统计】</p>
           <p>林小璐亲密度：${stats.attr1}</p>
@@ -407,14 +438,14 @@
           <button id="btn-share" class="btn btn-light">分享结果</button>
           <small id="share-tip" style="display:none; margin-top:5px;">内容已复制到剪切板</small><br>
           <button id="btn-restart" class="btn btn-light mt-3">重新开始</button>
-          <p>事件、数值设计仍有欠缺，诚邀您进群参与开发。</p>
+          <p>事件、数值设计仍有欠缺，诚邀您进群（游戏群：109252951）参与开发。</p>
         </div>
       `);
       // 绑定分享时也会把 shareExtra 一起复制
       $('#btn-share').click(() => {
         navigator.clipboard.writeText(shareText).then(() => $('#share-tip').show());
       });
-      $('#btn-restart').click(()=>location.reload());
+      $('#btn-restart').click(() => location.reload());
     }
 
     // 应用决策

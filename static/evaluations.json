@@ -38,9 +38,9 @@
   },
   {
     "id": "amazonForest",
-    "name": "在一个任何探测器也找不到的地下室内，这就是翠雀的所在之处……",
+    "name": "在一个任何探测术式都找不到的地下室内，这就是翠雀的所在之处……",
     "conditions": [
-      { "field": "attr1",        "op": "=",  "value": 100 },
+      { "field": "attr1",        "op": ">",  "value": 90 },
       { "field": "attr2",        "op": ">",  "value": 90 },
       { "field": "attr3",        "op": ">",  "value": 90 }
     ]

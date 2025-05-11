@@ -44,14 +44,69 @@
     ]
   },
   {
-    "id": "amazonForest",
-    "name": "在一个任何探测术式都找不到的地下室内，这就是翠雀的所在之处……",
+    "id": "basement",
+    "name": "一个任何探测术式也找不到的地下室内，就是翠雀的所在之地……",
     "conditions": [
       { "field": "attr1",        "op": ">",  "value": 90 },
       { "field": "attr2",        "op": ">",  "value": 90 },
       { "field": "attr3",        "op": ">",  "value": 90 }
     ]
-  },  {
+  },
+  {
+    "id": "basement2",
+    "name": "一轮强劲音乐响起，好像是一首很旧的歌，而正在此刻，三个人影在身后出现……",
+    "conditions": [
+      { "field": "attr1",        "op": ">",  "value": 90 },
+      { "field": "attr2",        "op": ">",  "value": 90 },
+      { "field": "attr3",        "op": ">",  "value": 90 }
+    ]
+  },
+  {
+    "id": "basement3",
+    "name": "不清楚发生了什么，但一种古怪的感觉忽然出现，翠雀的鸡皮不禁立即布满全身，而冷汗，更是狂飙！",
+    "conditions": [
+      { "field": "attr1",        "op": ">",  "value": 95 },
+      { "field": "attr2",        "op": ">",  "value": 90 },
+      { "field": "attr3",        "op": ">",  "value": 90 }
+    ]
+  },
+  {
+    "id": "basement4",
+    "name": "前来的三个人，究竟是什么「高手」了？",
+    "conditions": [
+      { "field": "attr1",        "op": ">",  "value": 95 },
+      { "field": "attr2",        "op": ">",  "value": 90 },
+      { "field": "attr3",        "op": ">",  "value": 90 }
+    ]
+  },
+  {
+    "id": "basement5",
+    "name": "哗！！原来是三个穿着很少布的魔法少女；跃跃欲试的小璐、笑意盈盈的夏凉、一脸孝顺的小白，已知道她们是魔法少女中的极品了。",
+    "conditions": [
+      { "field": "attr1",        "op": ">",  "value": 95 },
+      { "field": "attr2",        "op": ">",  "value": 95 },
+      { "field": "attr3",        "op": ">",  "value": 90 }
+    ]
+  },
+  {
+    "id": "basement6",
+    "name": "“哇哇哇哇……”看着这三个魔法少女对翠雀来说比面前十亿只残兽更恐怖……，更可怕呀！！",
+    "conditions": [
+      { "field": "attr1",        "op": ">",  "value": 95 },
+      { "field": "attr2",        "op": ">",  "value": 95 },
+      { "field": "attr3",        "op": ">",  "value": 90 }
+    ]
+  },
+  {
+    "id": "basement7",
+    "name": "“你……你这家伙，……你……你不能不……不可以……这样做……不可以呀！！”",
+    "conditions": [
+      { "field": "attr1",        "op": ">",  "value": 95 },
+      { "field": "attr2",        "op": ">",  "value": 95 },
+      { "field": "attr3",        "op": ">",  "value": 95 }
+    ]
+  },
+  {
     "id": "mofazhishi",
     "name": "魔法芝士",
     "conditions": [

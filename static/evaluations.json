@@ -1,0 +1,125 @@
+[
+  {
+    "id": "fastKill",
+    "name": "最速击坠",
+    "conditions": [
+      { "field": "turnCount",    "op": "=",  "value": 1 }
+    ]
+  },
+  {
+    "id": "keepGoing",
+    "name": "不要停下来啊！",
+    "conditions": [
+      { "field": "endCount",     "op": ">",  "value": 10 }
+    ]
+  },
+  {
+    "id": "balanceMaster",
+    "name": "平衡大师",
+    "conditions": [
+      { "field": "turnCount",    "op": ">",  "value": 30 }
+    ]
+  },
+  {
+    "id": "legendBalancer",
+    "name": "传奇平衡王",
+    "conditions": [
+      { "field": "turnCount",    "op": ">",  "value": 100 }
+    ]
+  },
+  {
+    "id": "shuraField",
+    "name": "修罗场",
+    "conditions": [
+      { "field": "attr1",        "op": ">",  "value": 80 },
+      { "field": "attr2",        "op": ">",  "value": 80 },
+      { "field": "attr3",        "op": ">",  "value": 80 }
+    ]
+  },
+  {
+    "id": "magicCheese",
+    "name": "魔法芝士",
+    "conditions": [
+      { "field": "endCount",     "op": ">",  "value": 1 },
+      { "field": "attr1",        "op": ">",  "value": 80 },
+      { "field": "attr2",        "op": ">",  "value": 80 },
+      { "field": "attr3",        "op": ">",  "value": 80 },
+      { "field": "attr4",        "op": ">",  "value": 80 }
+    ]
+  },
+  {
+    "id": "nearLegend",
+    "name": "距离传奇已经很近了",
+    "conditions": [
+      { "field": "attr1",        "op": ">",  "value": 80 },
+      { "field": "attr2",        "op": ">",  "value": 80 },
+      { "field": "attr3",        "op": ">",  "value": 80 },
+      { "field": "attr4",        "op": ">",  "value": 80 }
+    ]
+  },
+  {
+    "id": "farFromPeople",
+    "name": "距离人已经很远了",
+    "conditions": [
+      { "field": "attr1",        "op": "<",  "value": 20 },
+      { "field": "attr2",        "op": "<",  "value": 20 },
+      { "field": "attr3",        "op": "<",  "value": 20 },
+      { "field": "attr4",        "op": "<",  "value": 20 }
+    ]
+  },
+  {
+    "id": "endingCollector",
+    "name": "结局收藏家",
+    "conditions": [
+      { "field": "endCount",     "op": ">",  "value": 2 }
+    ]
+  },
+  {
+    "id": "xiaLiangDirty",
+    "name": "夏凉疑似有点太卑鄙了",
+    "conditions": [
+      { "field": "endings",      "op": "includes", "value": "attr1Low" },
+      { "field": "endings",      "op": "includes", "value": "attr2High" }
+    ]
+  },
+  {
+    "id": "xiaLiangHarsh",
+    "name": "夏凉疑似有点太狠心了",
+    "conditions": [
+      { "field": "endings",      "op": "includes", "value": "attr3Low" },
+      { "field": "endings",      "op": "includes", "value": "attr2High" }
+    ]
+  },
+  {
+    "id": "rebelDaughter",
+    "name": "你能违抗拥有女儿身份的我吗？",
+    "conditions": [
+      { "field": "endings",      "op": "includes", "value": "attr2Low" },
+      { "field": "endings",      "op": "includes", "value": "attr1High" }
+    ]
+  },
+  {
+    "id": "trueDaughter",
+    "name": "这就是真女儿的余裕！",
+    "conditions": [
+      { "field": "endings",      "op": "includes", "value": "attr3Low" },
+      { "field": "endings",      "op": "includes", "value": "attr1High" }
+    ]
+  },
+  {
+    "id": "sorrySis",
+    "name": "姐姐，对不起",
+    "conditions": [
+      { "field": "endings",      "op": "includes", "value": "attr1Low" },
+      { "field": "endings",      "op": "includes", "value": "attr3High" }
+    ]
+  },
+  {
+    "id": "whiteRushWin",
+    "name": "白氏速攻法的胜利",
+    "conditions": [
+      { "field": "endings",      "op": "includes", "value": "attr2Low" },
+      { "field": "endings",      "op": "includes", "value": "attr3High" }
+    ]
+  }
+]

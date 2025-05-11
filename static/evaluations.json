@@ -102,6 +102,26 @@
     ]
   },
   {
+    "id": "youDiamond",
+    "name": "你这宝石权杖！",
+    "conditions": [
+      { "field": "attr1",        "op": "<",  "value": 20 },
+      { "field": "attr2",        "op": "<",  "value": 20 },
+      { "field": "attr3",        "op": "<",  "value": 20 },
+      { "field": "attr4",        "op": ">",  "value": 95 }
+    ]
+  },
+  {
+    "id": "youDiamond2",
+    "name": "哈基雀，你这家伙……抛下三小只去当宝石权杖了是吧！",
+    "conditions": [
+      { "field": "attr1",        "op": "<",  "value": 5 },
+      { "field": "attr2",        "op": "<",  "value": 5 },
+      { "field": "attr3",        "op": "<",  "value": 5 },
+      { "field": "attr4",        "op": ">",  "value": 99 }
+    ]
+  },
+  {
     "id": "xiaLiangDirty",
     "name": "夏凉疑似有点太卑鄙了",
     "conditions": [

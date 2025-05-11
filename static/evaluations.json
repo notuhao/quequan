@@ -76,6 +76,25 @@
     ]
   },
   {
+    "id": "bladeSpeed",
+    "name": "女人只会影响我拔剑的速度",
+    "conditions": [
+      { "field": "attr1",        "op": "<",  "value": 15 },
+      { "field": "attr2",        "op": "<",  "value": 15 },
+      { "field": "attr3",        "op": "<",  "value": 15 }
+    ]
+  },
+  {
+    "id": "bePeople",
+    "name": "……求求你做个人吧",
+    "conditions": [
+      { "field": "attr1",        "op": "<",  "value": 10 },
+      { "field": "attr2",        "op": "<",  "value": 10 },
+      { "field": "attr3",        "op": "<",  "value": 10 },
+      { "field": "attr4",        "op": "<",  "value": 10 }
+    ]
+  },
+  {
     "id": "endingCollector",
     "name": "结局收藏家",
     "conditions": [
